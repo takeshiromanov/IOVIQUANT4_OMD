@@ -1,0 +1,241 @@
+ticker,enabled,group,region,country,currency,listing_market,sector_bucket,selection_source
+SNDK,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+MU,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+STX,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+INTC,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+AMD,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+DELL,true,core,USA,United States,USD,NYSE,Technology,original_universe_frozen
+LRCX,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+ARM,true,core,EUROPE,United Kingdom,USD,NASDAQ_ADR,Technology,original_universe_frozen
+AMAT,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+CAT,true,core,USA,United States,USD,NYSE,Industrials,original_universe_frozen
+TSM,true,core,DEVELOPED_ASIA,Taiwan,USD,NYSE_ADR,Technology,original_universe_frozen
+GOOG,true,core,USA,United States,USD,NASDAQ,Communication,original_universe_frozen
+GEV,true,core,USA,United States,USD,NYSE,Industrials,original_universe_frozen
+ANET,true,core,USA,United States,USD,NYSE,Technology,original_universe_frozen
+CSCO,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+AVGO,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+BHP,true,core,DEVELOPED_ASIA,Australia,USD,NYSE_ADR,EnergyMaterials,original_universe_frozen
+GS,true,core,USA,United States,USD,NYSE,Financials,original_universe_frozen
+C,true,core,USA,United States,USD,NYSE,Financials,original_universe_frozen
+NVDA,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+MS,true,core,USA,United States,USD,NYSE,Financials,original_universe_frozen
+TXN,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+QCOM,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+PANW,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+APP,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+AAPL,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+ORCL,true,core,USA,United States,USD,NYSE,Technology,original_universe_frozen
+MRK,true,core,USA,United States,USD,NYSE,Healthcare,original_universe_frozen
+LLY,true,core,USA,United States,USD,NYSE,Healthcare,original_universe_frozen
+XOM,true,core,USA,United States,USD,NYSE,EnergyMaterials,original_universe_frozen
+JNJ,true,core,USA,United States,USD,NYSE,Healthcare,original_universe_frozen
+CVX,true,core,USA,United States,USD,NYSE,EnergyMaterials,original_universe_frozen
+MUFG,true,core,DEVELOPED_ASIA,Japan,USD,NYSE_ADR,Financials,original_universe_frozen
+GE,true,core,USA,United States,USD,NYSE,Industrials,original_universe_frozen
+SHEL,true,core,EUROPE,United Kingdom,USD,NYSE_ADR,EnergyMaterials,original_universe_frozen
+RTX,true,core,USA,United States,USD,NYSE,Industrials,original_universe_frozen
+AMZN,true,core,USA,United States,USD,NASDAQ,Consumer,original_universe_frozen
+UNH,true,core,USA,United States,USD,NYSE,Healthcare,original_universe_frozen
+IBM,true,core,USA,United States,USD,NYSE,Technology,original_universe_frozen
+PLTR,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+TSLA,true,core,USA,United States,USD,NASDAQ,Consumer,original_universe_frozen
+BAC,true,core,USA,United States,USD,NYSE,Financials,original_universe_frozen
+WMT,true,core,USA,United States,USD,NYSE,Consumer,original_universe_frozen
+ABBV,true,core,USA,United States,USD,NYSE,Healthcare,original_universe_frozen
+JPM,true,core,USA,United States,USD,NYSE,Financials,original_universe_frozen
+BABA,true,core,CHINA_HK,China,USD,NYSE_ADR,Communication,original_universe_frozen
+KO,true,core,USA,United States,USD,NYSE,Consumer,original_universe_frozen
+AXP,true,core,USA,United States,USD,NYSE,Financials,original_universe_frozen
+LIN,true,core,EUROPE,Ireland,USD,NASDAQ,EnergyMaterials,original_universe_frozen
+WFC,true,core,USA,United States,USD,NYSE,Financials,original_universe_frozen
+MSFT,true,core,USA,United States,USD,NASDAQ,Technology,original_universe_frozen
+PM,true,core,USA,United States,USD,NYSE,Consumer,original_universe_frozen
+BRK-B,true,core,USA,United States,USD,NYSE,Financials,original_universe_frozen
+META,true,core,USA,United States,USD,NASDAQ,Communication,original_universe_frozen
+V,true,core,USA,United States,USD,NYSE,Financials,original_universe_frozen
+MA,true,core,USA,United States,USD,NYSE,Financials,original_universe_frozen
+HD,true,core,USA,United States,USD,NYSE,Consumer,original_universe_frozen
+PG,true,core,USA,United States,USD,NYSE,Consumer,original_universe_frozen
+TMUS,true,core,USA,United States,USD,NASDAQ,Communication,original_universe_frozen
+SAP,true,core,EUROPE,Germany,USD,NYSE_ADR,Technology,original_universe_frozen
+WDC,true,expanded_global,USA,United States,USD,NASDAQ,Technology,global_large_cap_policy_2026-08-07
+VRT,true,expanded_global,USA,United States,USD,NYSE,Industrials,global_large_cap_policy_2026-08-07
+CRWD,true,expanded_global,USA,United States,USD,NASDAQ,Technology,global_large_cap_policy_2026-08-07
+HOOD,true,expanded_global,USA,United States,USD,NASDAQ,Financials,global_large_cap_policy_2026-08-07
+HWM,true,expanded_global,USA,United States,USD,NYSE,Industrials,global_large_cap_policy_2026-08-07
+COHR,true,expanded_global,USA,United States,USD,NYSE,Technology,global_large_cap_policy_2026-08-07
+IBKR,true,expanded_global,USA,United States,USD,NASDAQ,Financials,global_large_cap_policy_2026-08-07
+APH,true,expanded_global,USA,United States,USD,NYSE,Technology,global_large_cap_policy_2026-08-07
+KLAC,true,expanded_global,USA,United States,USD,NASDAQ,Technology,global_large_cap_policy_2026-08-07
+MRVL,true,expanded_global,USA,United States,USD,NASDAQ,Technology,global_large_cap_policy_2026-08-07
+CEG,true,expanded_global,USA,United States,USD,NASDAQ,Utilities,global_large_cap_policy_2026-08-07
+AXON,true,expanded_global,USA,United States,USD,NASDAQ,Industrials,global_large_cap_policy_2026-08-07
+PWR,true,expanded_global,USA,United States,USD,NYSE,Industrials,global_large_cap_policy_2026-08-07
+CMI,true,expanded_global,USA,United States,USD,NYSE,Industrials,global_large_cap_policy_2026-08-07
+PH,true,expanded_global,USA,United States,USD,NYSE,Industrials,global_large_cap_policy_2026-08-07
+URI,true,expanded_global,USA,United States,USD,NYSE,Industrials,global_large_cap_policy_2026-08-07
+VST,true,expanded_global,USA,United States,USD,NYSE,Utilities,global_large_cap_policy_2026-08-07
+EOG,true,expanded_global,USA,United States,USD,NYSE,EnergyMaterials,global_large_cap_policy_2026-08-07
+NOW,true,expanded_global,USA,United States,USD,NYSE,Technology,global_large_cap_policy_2026-08-07
+SLB,true,expanded_global,USA,United States,USD,NYSE,EnergyMaterials,global_large_cap_policy_2026-08-07
+NFLX,true,expanded_global,USA,United States,USD,NASDAQ,Communication,global_large_cap_policy_2026-08-07
+UBER,true,expanded_global,USA,United States,USD,NYSE,Industrials,global_large_cap_policy_2026-08-07
+FCX,true,expanded_global,USA,United States,USD,NYSE,EnergyMaterials,global_large_cap_policy_2026-08-07
+ISRG,true,expanded_global,USA,United States,USD,NASDAQ,Healthcare,global_large_cap_policy_2026-08-07
+BSX,true,expanded_global,USA,United States,USD,NYSE,Healthcare,global_large_cap_policy_2026-08-07
+TMO,true,expanded_global,USA,United States,USD,NYSE,Healthcare,global_large_cap_policy_2026-08-07
+ETN,true,expanded_global,USA,United States,USD,NYSE,Industrials,global_large_cap_policy_2026-08-07
+TT,true,expanded_global,USA,United States,USD,NYSE,Industrials,global_large_cap_policy_2026-08-07
+CARR,true,expanded_global,USA,United States,USD,NYSE,Industrials,global_large_cap_policy_2026-08-07
+LMT,true,expanded_global,USA,United States,USD,NYSE,Industrials,global_large_cap_policy_2026-08-07
+NOC,true,expanded_global,USA,United States,USD,NYSE,Industrials,global_large_cap_policy_2026-08-07
+NUE,true,expanded_global,USA,United States,USD,NYSE,EnergyMaterials,global_large_cap_policy_2026-08-07
+MCK,true,expanded_global,USA,United States,USD,NYSE,Healthcare,global_large_cap_policy_2026-08-07
+REGN,true,expanded_global,USA,United States,USD,NASDAQ,Healthcare,global_large_cap_policy_2026-08-07
+VRTX,true,expanded_global,USA,United States,USD,NASDAQ,Healthcare,global_large_cap_policy_2026-08-07
+GILD,true,expanded_global,USA,United States,USD,NASDAQ,Healthcare,global_large_cap_policy_2026-08-07
+COP,true,expanded_global,USA,United States,USD,NYSE,EnergyMaterials,global_large_cap_policy_2026-08-07
+MPC,true,expanded_global,USA,United States,USD,NYSE,EnergyMaterials,global_large_cap_policy_2026-08-07
+SHOP.TO,true,expanded_global,CANADA,Canada,CAD,TSX,Technology,global_large_cap_policy_2026-08-07
+CSU.TO,true,expanded_global,CANADA,Canada,CAD,TSX,Technology,global_large_cap_policy_2026-08-07
+CNR.TO,true,expanded_global,CANADA,Canada,CAD,TSX,Industrials,global_large_cap_policy_2026-08-07
+CP.TO,true,expanded_global,CANADA,Canada,CAD,TSX,Industrials,global_large_cap_policy_2026-08-07
+CCO.TO,true,expanded_global,CANADA,Canada,CAD,TSX,EnergyMaterials,global_large_cap_policy_2026-08-07
+BN.TO,true,expanded_global,CANADA,Canada,CAD,TSX,Financials,global_large_cap_policy_2026-08-07
+CNQ.TO,true,expanded_global,CANADA,Canada,CAD,TSX,EnergyMaterials,global_large_cap_policy_2026-08-07
+WCN.TO,true,expanded_global,CANADA,Canada,CAD,TSX,Industrials,global_large_cap_policy_2026-08-07
+WSP.TO,true,expanded_global,CANADA,Canada,CAD,TSX,Industrials,global_large_cap_policy_2026-08-07
+CLS.TO,true,expanded_global,CANADA,Canada,CAD,TSX,Technology,global_large_cap_policy_2026-08-07
+ASML.AS,true,expanded_global,EUROPE,Netherlands,EUR,EURONEXT_AMSTERDAM,Technology,global_large_cap_policy_2026-08-07
+ASM.AS,true,expanded_global,EUROPE,Netherlands,EUR,EURONEXT_AMSTERDAM,Technology,global_large_cap_policy_2026-08-07
+AZN.L,true,expanded_global,EUROPE,United Kingdom,GBP,LSE,Healthcare,global_large_cap_policy_2026-08-07
+SIE.DE,true,expanded_global,EUROPE,Germany,EUR,XETRA,Industrials,global_large_cap_policy_2026-08-07
+RHM.DE,true,expanded_global,EUROPE,Germany,EUR,XETRA,Industrials,global_large_cap_policy_2026-08-07
+IFX.DE,true,expanded_global,EUROPE,Germany,EUR,XETRA,Technology,global_large_cap_policy_2026-08-07
+SU.PA,true,expanded_global,EUROPE,France,EUR,EURONEXT_PARIS,Industrials,global_large_cap_policy_2026-08-07
+AIR.PA,true,expanded_global,EUROPE,France,EUR,EURONEXT_PARIS,Industrials,global_large_cap_policy_2026-08-07
+SAF.PA,true,expanded_global,EUROPE,France,EUR,EURONEXT_PARIS,Industrials,global_large_cap_policy_2026-08-07
+MC.PA,true,expanded_global,EUROPE,France,EUR,EURONEXT_PARIS,Consumer,global_large_cap_policy_2026-08-07
+RACE.MI,true,expanded_global,EUROPE,Italy,EUR,BORSA_ITALIANA,Consumer,global_large_cap_policy_2026-08-07
+LDO.MI,true,expanded_global,EUROPE,Italy,EUR,BORSA_ITALIANA,Industrials,global_large_cap_policy_2026-08-07
+NOVO-B.CO,true,expanded_global,EUROPE,Denmark,DKK,NASDAQ_COPENHAGEN,Healthcare,global_large_cap_policy_2026-08-07
+DSV.CO,true,expanded_global,EUROPE,Denmark,DKK,NASDAQ_COPENHAGEN,Industrials,global_large_cap_policy_2026-08-07
+SAAB-B.ST,true,expanded_global,EUROPE,Sweden,SEK,NASDAQ_STOCKHOLM,Industrials,global_large_cap_policy_2026-08-07
+ATCO-A.ST,true,expanded_global,EUROPE,Sweden,SEK,NASDAQ_STOCKHOLM,Industrials,global_large_cap_policy_2026-08-07
+ABBN.SW,true,expanded_global,EUROPE,Switzerland,CHF,SIX,Industrials,global_large_cap_policy_2026-08-07
+RO.SW,true,expanded_global,EUROPE,Switzerland,CHF,SIX,Healthcare,global_large_cap_policy_2026-08-07
+RR.L,true,expanded_global,EUROPE,United Kingdom,GBP,LSE,Industrials,global_large_cap_policy_2026-08-07
+RIO.L,true,expanded_global,EUROPE,United Kingdom,GBP,LSE,EnergyMaterials,global_large_cap_policy_2026-08-07
+7203.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Consumer,global_large_cap_policy_2026-08-07
+6758.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Technology,global_large_cap_policy_2026-08-07
+9984.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Communication,global_large_cap_policy_2026-08-07
+8035.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Technology,global_large_cap_policy_2026-08-07
+6857.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Technology,global_large_cap_policy_2026-08-07
+6501.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Industrials,global_large_cap_policy_2026-08-07
+7011.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Industrials,global_large_cap_policy_2026-08-07
+6702.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Technology,global_large_cap_policy_2026-08-07
+6098.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Industrials,global_large_cap_policy_2026-08-07
+6861.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Technology,global_large_cap_policy_2026-08-07
+7741.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Healthcare,global_large_cap_policy_2026-08-07
+4063.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,EnergyMaterials,global_large_cap_policy_2026-08-07
+6146.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Technology,global_large_cap_policy_2026-08-07
+5803.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Industrials,global_large_cap_policy_2026-08-07
+7974.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Communication,global_large_cap_policy_2026-08-07
+1605.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,EnergyMaterials,global_large_cap_policy_2026-08-07
+8001.T,true,expanded_global,DEVELOPED_ASIA,Japan,JPY,TSE,Industrials,global_large_cap_policy_2026-08-07
+005930.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Technology,global_large_cap_policy_2026-08-07
+000660.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Technology,global_large_cap_policy_2026-08-07
+373220.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Industrials,global_large_cap_policy_2026-08-07
+207940.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Healthcare,global_large_cap_policy_2026-08-07
+005380.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Consumer,global_large_cap_policy_2026-08-07
+000270.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Consumer,global_large_cap_policy_2026-08-07
+035420.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Communication,global_large_cap_policy_2026-08-07
+068270.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Healthcare,global_large_cap_policy_2026-08-07
+006400.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Industrials,global_large_cap_policy_2026-08-07
+051910.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,EnergyMaterials,global_large_cap_policy_2026-08-07
+105560.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Financials,global_large_cap_policy_2026-08-07
+012450.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Industrials,global_large_cap_policy_2026-08-07
+042660.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Industrials,global_large_cap_policy_2026-08-07
+329180.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Industrials,global_large_cap_policy_2026-08-07
+009540.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Industrials,global_large_cap_policy_2026-08-07
+034020.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Industrials,global_large_cap_policy_2026-08-07
+267260.KS,true,expanded_global,DEVELOPED_ASIA,South Korea,KRW,KOSPI,Industrials,global_large_cap_policy_2026-08-07
+2317.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+2454.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+2308.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+2382.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+3231.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+6669.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+2303.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+3711.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+3017.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+2376.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+2357.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+2327.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+3661.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+3008.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+2395.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+2059.TW,true,expanded_global,DEVELOPED_ASIA,Taiwan,TWD,TWSE,Technology,global_large_cap_policy_2026-08-07
+CSL.AX,true,expanded_global,DEVELOPED_ASIA,Australia,AUD,ASX,Healthcare,global_large_cap_policy_2026-08-07
+D05.SI,true,expanded_global,DEVELOPED_ASIA,Singapore,SGD,SGX,Financials,global_large_cap_policy_2026-08-07
+SE,true,expanded_global,DEVELOPED_ASIA,Singapore,USD,NYSE_ADR,Communication,global_large_cap_policy_2026-08-07
+0700.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Communication,global_large_cap_policy_2026-08-07
+1810.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Technology,global_large_cap_policy_2026-08-07
+3690.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Communication,global_large_cap_policy_2026-08-07
+9618.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Consumer,global_large_cap_policy_2026-08-07
+9999.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Communication,global_large_cap_policy_2026-08-07
+1024.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Communication,global_large_cap_policy_2026-08-07
+1211.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Consumer,global_large_cap_policy_2026-08-07
+2020.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Consumer,global_large_cap_policy_2026-08-07
+6690.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Consumer,global_large_cap_policy_2026-08-07
+0981.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Technology,global_large_cap_policy_2026-08-07
+1347.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Technology,global_large_cap_policy_2026-08-07
+2382.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Technology,global_large_cap_policy_2026-08-07
+0285.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Technology,global_large_cap_policy_2026-08-07
+2269.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Healthcare,global_large_cap_policy_2026-08-07
+0388.HK,true,expanded_global,CHINA_HK,Hong Kong,HKD,HKEX,Financials,global_large_cap_policy_2026-08-07
+1299.HK,true,expanded_global,CHINA_HK,Hong Kong,HKD,HKEX,Financials,global_large_cap_policy_2026-08-07
+0669.HK,true,expanded_global,CHINA_HK,Hong Kong,HKD,HKEX,Industrials,global_large_cap_policy_2026-08-07
+9992.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Consumer,global_large_cap_policy_2026-08-07
+1093.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Healthcare,global_large_cap_policy_2026-08-07
+6160.HK,true,expanded_global,CHINA_HK,China,HKD,HKEX,Healthcare,global_large_cap_policy_2026-08-07
+PDD,true,expanded_global,CHINA_HK,China,USD,NASDAQ_ADR,Communication,global_large_cap_policy_2026-08-07
+BIDU,true,expanded_global,CHINA_HK,China,USD,NASDAQ_ADR,Communication,global_large_cap_policy_2026-08-07
+TCOM,true,expanded_global,CHINA_HK,China,USD,NASDAQ_ADR,Consumer,global_large_cap_policy_2026-08-07
+BEKE,true,expanded_global,CHINA_HK,China,USD,NYSE_ADR,Consumer,global_large_cap_policy_2026-08-07
+FUTU,true,expanded_global,CHINA_HK,China,USD,NASDAQ_ADR,Financials,global_large_cap_policy_2026-08-07
+NIO,true,expanded_global,CHINA_HK,China,USD,NYSE_ADR,Consumer,global_large_cap_policy_2026-08-07
+XPEV,true,expanded_global,CHINA_HK,China,USD,NYSE_ADR,Consumer,global_large_cap_policy_2026-08-07
+LI,true,expanded_global,CHINA_HK,China,USD,NASDAQ_ADR,Consumer,global_large_cap_policy_2026-08-07
+TME,true,expanded_global,CHINA_HK,China,USD,NYSE_ADR,Communication,global_large_cap_policy_2026-08-07
+RELIANCE.NS,true,expanded_global,EM_EX_CHINA,India,INR,NSE,EnergyMaterials,global_large_cap_policy_2026-08-07
+TCS.NS,true,expanded_global,EM_EX_CHINA,India,INR,NSE,Technology,global_large_cap_policy_2026-08-07
+HDFCBANK.NS,true,expanded_global,EM_EX_CHINA,India,INR,NSE,Financials,global_large_cap_policy_2026-08-07
+ICICIBANK.NS,true,expanded_global,EM_EX_CHINA,India,INR,NSE,Financials,global_large_cap_policy_2026-08-07
+BHARTIARTL.NS,true,expanded_global,EM_EX_CHINA,India,INR,NSE,Communication,global_large_cap_policy_2026-08-07
+INFY.NS,true,expanded_global,EM_EX_CHINA,India,INR,NSE,Technology,global_large_cap_policy_2026-08-07
+DRREDDY.NS,true,expanded_global,EM_EX_CHINA,India,INR,NSE,Healthcare,global_large_cap_policy_2026-08-07
+LT.NS,true,expanded_global,EM_EX_CHINA,India,INR,NSE,Industrials,global_large_cap_policy_2026-08-07
+BAJFINANCE.NS,true,expanded_global,EM_EX_CHINA,India,INR,NSE,Financials,global_large_cap_policy_2026-08-07
+MARUTI.NS,true,expanded_global,EM_EX_CHINA,India,INR,NSE,Consumer,global_large_cap_policy_2026-08-07
+SUNPHARMA.NS,true,expanded_global,EM_EX_CHINA,India,INR,NSE,Healthcare,global_large_cap_policy_2026-08-07
+ADANIPORTS.NS,true,expanded_global,EM_EX_CHINA,India,INR,NSE,Industrials,global_large_cap_policy_2026-08-07
+MELI,true,expanded_global,EM_EX_CHINA,Argentina,USD,NASDAQ,Consumer,global_large_cap_policy_2026-08-07
+NU,true,expanded_global,EM_EX_CHINA,Brazil,USD,NYSE,Financials,global_large_cap_policy_2026-08-07
+VALE,true,expanded_global,EM_EX_CHINA,Brazil,USD,NYSE_ADR,EnergyMaterials,global_large_cap_policy_2026-08-07
+PBR,true,expanded_global,EM_EX_CHINA,Brazil,USD,NYSE_ADR,EnergyMaterials,global_large_cap_policy_2026-08-07
+ITUB,true,expanded_global,EM_EX_CHINA,Brazil,USD,NYSE_ADR,Financials,global_large_cap_policy_2026-08-07
+AMX,true,expanded_global,EM_EX_CHINA,Mexico,USD,NYSE_ADR,Communication,global_large_cap_policy_2026-08-07
+FMX,true,expanded_global,EM_EX_CHINA,Mexico,USD,NYSE_ADR,Consumer,global_large_cap_policy_2026-08-07
+WALMEX.MX,true,expanded_global,EM_EX_CHINA,Mexico,MXN,BMV,Consumer,global_large_cap_policy_2026-08-07
+2222.SR,true,expanded_global,EM_EX_CHINA,Saudi Arabia,SAR,TADAWUL,EnergyMaterials,global_large_cap_policy_2026-08-07
+1120.SR,true,expanded_global,EM_EX_CHINA,Saudi Arabia,SAR,TADAWUL,Financials,global_large_cap_policy_2026-08-07
+2010.SR,true,expanded_global,EM_EX_CHINA,Saudi Arabia,SAR,TADAWUL,EnergyMaterials,global_large_cap_policy_2026-08-07
+1211.SR,true,expanded_global,EM_EX_CHINA,Saudi Arabia,SAR,TADAWUL,EnergyMaterials,global_large_cap_policy_2026-08-07
+7010.SR,true,expanded_global,EM_EX_CHINA,Saudi Arabia,SAR,TADAWUL,Communication,global_large_cap_policy_2026-08-07
+BBCA.JK,true,expanded_global,EM_EX_CHINA,Indonesia,IDR,IDX,Financials,global_large_cap_policy_2026-08-07
+BMRI.JK,true,expanded_global,EM_EX_CHINA,Indonesia,IDR,IDX,Financials,global_large_cap_policy_2026-08-07
+1155.KL,true,expanded_global,EM_EX_CHINA,Malaysia,MYR,BURSA_MALAYSIA,Financials,global_large_cap_policy_2026-08-07
+DELTA.BK,true,expanded_global,EM_EX_CHINA,Thailand,THB,SET,Technology,global_large_cap_policy_2026-08-07
+GFI,true,expanded_global,EM_EX_CHINA,South Africa,USD,NYSE_ADR,EnergyMaterials,global_large_cap_policy_2026-08-07
