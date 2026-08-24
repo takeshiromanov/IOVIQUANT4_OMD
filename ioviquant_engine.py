@@ -636,31 +636,28 @@ RECOMMENDED_PARAMS_GROSS_NATIVE = {
 }
 
 # ==============================================================================
-# NOTA 18/07/2026 — parametri esclusi dal set libero per future ottimizzazioni
+# NOTA aggiornata 24/08/2026 — parametri esclusi dal set libero
 # congiunte, perche' confermati ridondanti/non-vincolanti SOTTO RECOMMENDED_PARAMS
 # specificamente (non sotto DEFAULT_PARAMS, che li mantiene tutti attivi come
 # baseline "vanilla" intenzionale, invariata per non comprometterne il significato
 # di confronto). Nessuna riga di codice rimossa dal motore: la stessa formula resta
 # valida per Legacy/Scalare Default, che dipendono da questi parametri con valori
-# diversi. Chi riprende la calibrazione NON deve includere questi 5 nei prossimi
+# diversi. Chi riprende la calibrazione NON deve includere questi parametri nei prossimi
 # grid/sweep quando parte da RECOMMENDED_PARAMS:
 #   - breakout_lookback, compression_ratio: alimentano solo breakout_bonus, che con
 #     breakout_bonus_pct=0.0 (Step A) e' sempre zero per costruzione. Morti SOLO qui.
-#   - entry_threshold: con floor_base=1.6, macro_regime_score da solo supera sempre
-#     0.35 -> il gate non ha mai filtrato un trade (bit-identico 0.0/0.20/0.35 su
-#     FULL/SUB_A/SUB_B). Morto SOLO con floor_base=1.6 (sotto DEFAULT_PARAMS,
-#     floor_base=0.4, NON verificato — potrebbe tornare vincolante, non testato).
-#   - k_profit_cap: satura esattamente al valore corrente (5.0) — nessun valore
-#     superiore cambia una sola metrica su SUB_A o SUB_B. Non serve piu' tunarlo.
-#   - w_bf, w_hmm: non piu' liberi, fissati sopra a 1.0/0.0 (vedi commento inline).
-# Verificati invece VIVI e NON semplificabili in questo giro: vix_threshold, vix_k
+#   - profit_threshold e k_profit_cap: esclusi insieme al profit-aware, ora spento
+#     e confermato bit-identico su core-60 e Xetra 590.
+#   - w_hmm: non piu' libero, fissato sopra a 0.0; w_bf resta regolabile.
+#   - hmm_w e old_breadth_threshold: appartengono esclusivamente ai percorsi
+#     Legacy/breadth non-2D e non fanno parte della calibrazione Lite.
+# Verificati invece VIVI e NON semplificabili in questo giro: entry_threshold e
+# breadth_alpha (sweep 24/08/2026 sulla nuova baseline), vix_threshold, vix_k
 # (sensibilita' reale, il default e' gia' un ottimo locale su train), floor_breadth_w
 # /ceiling_breadth_w (ablarli a 0 fa crollare l'Alpha di ~11pp), k_transition (il
 # meccanismo conta: azzerarlo cambia Alpha e MaxDD su SUB_B con un vero trade-off,
 # stessa firma bull-tilt di cx/floor-ceiling — resta pero' bassa la sensibilita' al
-# suo VALORE specifico, gia' noto da luglio, quindi va tenuto ma non va ri-tarato),
-# profit_threshold (attivo sotto ~0.5, il default e' gia' al bordo del plateau
-# inerte su SUB_A ma il meccanismo nel complesso resta necessario su SUB_B).
+# suo VALORE specifico, gia' noto da luglio, quindi va tenuto ma non va ri-tarato).
 #
 # Layer 6 (freno di portafoglio via correlazione realizzata: corr_window,
 # corr_threshold, corr_k, corr_floor) resta nel motore come modulo storico/di

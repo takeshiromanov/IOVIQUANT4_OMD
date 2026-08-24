@@ -88,11 +88,9 @@ st.sidebar.caption(
 # riprodurre esperimenti storici, ma non generano piu' controlli nel pannello.
 use_omd_entry_filter = False
 use_omd_forced_sell_exit = False
-legacy_mode = st.sidebar.checkbox(
-    "Attiva Modalità LEGACY (Setup Precedente)", value=False,
-    help="Se attivato, ignora le logiche scalari/2D/Filtro Unicorno e usa l'algoritmo rigido originario, "
-         "utile come baseline di confronto interno."
-)
+# La modalita' Legacy e i suoi parametri restano nel motore come riferimento
+# storico, ma non fanno parte della configurazione calibrabile Lite.
+legacy_mode = False
 use_scalar_sizing = st.sidebar.checkbox("Attiva Size Scalare Continua", value=True, disabled=legacy_mode)
 use_2d_breadth = st.sidebar.checkbox("Attiva Breadth 2D (Livello + Momentum)", value=True, disabled=legacy_mode)
 use_dynamic_sl = st.sidebar.checkbox("Attiva Trailing ATR Modulato dal Regime", value=True, disabled=legacy_mode)
@@ -150,8 +148,6 @@ with st.sidebar.form("backtest_params"):
     ext_k = st.slider("Decadimento Penalità Estensione", 0.1, 2.0, 0.5, 0.1, disabled=legacy_mode)
 
     st.header("🌍 Layer 3: Market Breadth")
-    old_breadth_threshold = st.slider("Soglia Filtro Breadth Fisso (%)", 10, 90, 40, 5,
-                                       help="In Legacy o con Breadth 2D disattivata, blocca ingressi sotto questa quota.")
     breadth_alpha = st.slider("Peso Componente Livello (vs Momentum)", 0.0, 1.0, 0.6, 0.1)
     breadth_k = st.slider("Lookback Momentum BF (giorni)", 10, 60, 30, 5)
 
@@ -166,18 +162,12 @@ with st.sidebar.form("backtest_params"):
                                  "(rimuoverlo/azzerarlo peggiora Alpha e MaxDD in modo netto).")
     ceiling_base = st.slider("Ceiling Inviluppo Macro Regime", 0.0, 3.0, 2.0, 0.1, disabled=legacy_mode,
                               help="Prima era fisso a 0.8. Calibrato a 2.0 il 16/07/2026, al bordo della griglia testata.")
-    hmm_w = st.slider("Peso Amplificatore HMM Legacy (w)", 0.0, 3.0, 1.5, 0.1,
-                       help="Usato solo in Legacy: 1 + w×(P_Bull - 0.5).")
-
     st.header("🛡️ Layer 5: Stop dinamico")
     w_bf = st.slider("Peso Breadth (BF) su R_exit", 0.0, 1.0, 1.0, 0.1, disabled=legacy_mode,
                       help="Aggiornato a 1.0 il 18/07/2026: R_exit ora e' guidato solo dalla breadth. "
                            "Il livello P_Bull (w_hmm) e' stato tolto perche' soffre della staleness "
                            "dell'HMM (refit ogni 21gg) — validato che la rimozione migliora Alpha e "
                            "MaxDD insieme, sia su train sia su test.")
-    w_hmm = st.slider("Peso HMM (P_Bull) su R_exit", 0.0, 1.0, 0.0, 0.1, disabled=legacy_mode,
-                       help="Aggiornato a 0.0 il 18/07/2026 (vedi nota su w_bf). Lasciato regolabile "
-                            "per confronto, ma 0.0 e' il valore validato.")
     k_min = st.slider("Moltiplicatore ATR Minimo (Stop Stretto)", 1.0, 3.0, 1.5, 0.1)
     k_max = st.slider("Moltiplicatore ATR Massimo (Lascia Correre)", 3.0, 6.0, 3.5, 0.1, disabled=legacy_mode)
 
@@ -280,18 +270,16 @@ def build_param_pack():
     # Gli override sotto corrispondono solo ai controlli realmente esposti.
     p = eng.RECOMMENDED_PARAMS.copy()
     p.update({
-        "legacy_mode": legacy_mode,
         "vix_threshold": vix_threshold, "vix_k": vix_k, "vix_floor": vix_floor,
         "entry_threshold": entry_threshold, "use_scalar_sizing": use_scalar_sizing,
         "ext_threshold": ext_threshold, "ext_k": ext_k,
         "breadth_alpha": breadth_alpha, "breadth_k": breadth_k,
-        "old_breadth_threshold": old_breadth_threshold, "use_2d_breadth": use_2d_breadth,
+        "use_2d_breadth": use_2d_breadth,
         "hmm_min_train": hmm_min_train, "hmm_refit_every": hmm_refit_every,
         "hmm_delta_lookback": hmm_delta_lookback, "k_transition": k_transition,
         "floor_base": floor_base, "floor_breadth_w": 0.6, "ceiling_base": ceiling_base, "ceiling_breadth_w": 1.7,
-        "hmm_w": hmm_w,
         "convexity_exp": convexity_exp,
-        "use_dynamic_sl": use_dynamic_sl, "w_bf": w_bf, "w_hmm": w_hmm,
+        "use_dynamic_sl": use_dynamic_sl, "w_bf": w_bf,
         "k_min": k_min, "k_max": k_max,
         "use_equity_cap": use_equity_cap,
         "use_fx_conversion": True,
