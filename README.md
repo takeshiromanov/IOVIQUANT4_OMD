@@ -8,6 +8,7 @@ Versione Streamlit del modello Unicorn Hunter con:
 - conversione causale degli OHLC locali in USD;
 - capitale e reporting in EUR;
 - COR1M letto esclusivamente dai CSV locali.
+- aggiornamento automatico del COR1M giornaliero tramite GitHub Actions;
 - integrazione OMD opzionale sull'universo Xetra: cluster Buy mensile da 60
   titoli (`K=30`) e cluster Sell da 30;
 - refit dei generatori OMD ogni 12 mesi, come nel progetto originale;
@@ -50,3 +51,20 @@ Yahoo Finance; il benchmark VWCE.MI resta espresso in EUR. Commissioni e
 microstruttura dei singoli mercati non sono ancora differenziate per borsa.
 
 Il progetto è sperimentale e non costituisce consulenza finanziaria.
+
+## Aggiornamento automatico COR1M
+
+Il workflow `.github/workflows/update-cor1m.yml` gira dal lunedì al venerdì
+alle 23:35 (`Europe/Rome`) ed è avviabile anche manualmente dalla scheda
+**Actions** di GitHub. Lo script `scripts/update_cor1m.py` legge l'ultima
+osservazione disponibile di `^COR1M` da Yahoo Finance e usa la data della
+quotazione restituita:
+
+- se la data non è presente nel CSV giornaliero, inserisce una nuova riga;
+- se è già presente, aggiorna la riga;
+- `Price`, `Open`, `High` e `Low` assumono tutti il valore Close;
+- weekend esclusi dal controllo di staleness;
+- nessun commit viene creato quando il CSV è già aggiornato.
+
+Il CSV weekly resta invariato perché l'app lo usa soltanto per il periodo
+precedente all'inizio della serie giornaliera.

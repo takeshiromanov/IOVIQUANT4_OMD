@@ -12,6 +12,7 @@ import config
 import ioviquant_engine as eng
 import omd_integration as omd_bridge
 import omd_hunter_comparison as omd_compare
+from scripts.update_cor1m import business_day_lag
 
 st.set_page_config(
     page_title="IOVIQUANT Pro - Unicorn Hunter",
@@ -544,11 +545,13 @@ if run_btn:
         dd["__VIX__"] = raw["^VIX"]
         dd["__FX__"] = raw["EURUSD=X"]
         cor1m = load_cor1m_local()
-        cor1m_lag_days = (pd.Timestamp(end_date) - cor1m.index.max()).days
-        if cor1m_lag_days > 7:
+        cor1m_lag_business_days = business_day_lag(
+            cor1m.index.max(), pd.Timestamp(end_date)
+        )
+        if cor1m_lag_business_days > 2:
             st.warning(
                 f"COR1M locale fermo al {cor1m.index.max():%Y-%m-%d} "
-                f"({cor1m_lag_days} giorni prima della data finale). "
+                f"({cor1m_lag_business_days} giorni feriali prima della data finale). "
                 "Il motore mantiene l'ultimo valore disponibile: aggiorna i CSV "
                 "prima di interpretare il risultato come segnale corrente."
             )
