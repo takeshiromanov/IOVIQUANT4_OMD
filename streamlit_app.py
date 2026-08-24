@@ -12,7 +12,7 @@ import config
 import ioviquant_engine as eng
 import omd_integration as omd_bridge
 import omd_hunter_comparison as omd_compare
-from scripts.update_cor1m import business_day_lag
+from shared_data import business_day_lag, load_cor1m_series
 
 st.set_page_config(
     page_title="IOVIQUANT Pro - Unicorn Hunter",
@@ -26,10 +26,6 @@ st.caption(
 )
 
 BASE_DIR = Path(__file__).resolve().parent
-COR1M_FILES = (
-    "CBOE_1Month_Implied_Correlation_Historical_Data.csv",
-    "CBOE_1Month_Implied_Correlation_Historical_Data2.csv",
-)
 YF_CACHE_DIR = Path(tempfile.gettempdir()) / "ioviquant_yfinance_cache"
 YF_CACHE_DIR.mkdir(parents=True, exist_ok=True)
 # Directory scrivibile sia in locale sia su Streamlit Community Cloud.
@@ -133,7 +129,7 @@ use_equity_cap = st.sidebar.checkbox(
 )
 use_cor1m_brake = st.sidebar.checkbox(
     "Attiva Freno Correlazione Implicita (^COR1M)", value=True, disabled=legacy_mode,
-    help="Usa i CSV COR1M locali, condivisi con l'harness di calibrazione."
+    help="Usa IOVIQUANT_DATA; se GitHub non risponde, ripiega sui CSV locali."
 )
 use_partial_exit = st.sidebar.checkbox(
     "Attiva Uscita Parziale (Layer 5quater)", value=False, disabled=legacy_mode,
@@ -231,8 +227,8 @@ with st.sidebar.form("backtest_params"):
                                    "esplorare oltre; un margine 3.5-5.0 resta da affinare (bassa priorità).")
 
     st.header("🔗 Layer 6bis: Freno Correlazione Implicita (^COR1M)")
-    st.caption("La serie COR1M viene caricata dai CSV locali, la stessa fonte usata "
-               "dall'harness di calibrazione.")
+    st.caption("La serie COR1M viene caricata dal repository dati comune, con "
+               "fallback sui CSV locali.")
     cor1m_threshold = st.slider("Soglia Correlazione Implicita (^COR1M)", 20.0, 60.0, 50.0, 1.0,
                                  disabled=(legacy_mode or not use_cor1m_brake),
                                  help="Calibrato a 50.0 (~P95 storico) il 11/07/2026. Sotto questa soglia il freno "
@@ -337,35 +333,10 @@ def fetch_raw_data(
     return data_dict
 
 
-@st.cache_data(show_spinner=False)
-def load_cor1m_local():
-    """Carica COR1M esclusivamente dai due CSV accanto ad app.py."""
-    paths = [BASE_DIR / filename for filename in COR1M_FILES]
-    missing = [path.name for path in paths if not path.is_file()]
-    if missing:
-        raise FileNotFoundError(
-            "File COR1M mancanti nella cartella dell'app: " + ", ".join(missing)
-        )
-    daily = pd.read_csv(paths[0], encoding="utf-8-sig")
-    weekly = pd.read_csv(paths[1], encoding="utf-8-sig")
-    for frame in (daily, weekly):
-        required = {"Date", "Price", "Open", "High", "Low"}
-        absent = required.difference(frame.columns)
-        if absent:
-            raise ValueError(f"CSV COR1M non valido; colonne mancanti: {sorted(absent)}")
-        frame["Date"] = pd.to_datetime(frame["Date"], format="%m/%d/%Y")
-        for col in ("Price", "Open", "High", "Low"):
-            frame[col] = pd.to_numeric(frame[col], errors="coerce")
-    daily = daily.set_index("Date").sort_index()
-    weekly = weekly.set_index("Date").sort_index()
-    combined = pd.concat([
-        weekly.loc[weekly.index < daily.index.min(), ["Open", "High", "Low", "Price"]],
-        daily[["Open", "High", "Low", "Price"]],
-    ]).sort_index().loc[lambda frame: ~frame.index.duplicated(keep="last")]
-    combined = combined.dropna(subset=["Open", "High", "Low", "Price"])
-    if combined.empty:
-        raise ValueError("I CSV COR1M locali non contengono righe OHLC utilizzabili.")
-    return combined.rename(columns={"Price": "Close"})
+@st.cache_data(ttl="1h", max_entries=2, show_spinner=False)
+def load_cor1m():
+    """Carica COR1M dalla fonte comune con fallback locale atomico."""
+    return load_cor1m_series(BASE_DIR)
 
 
 def build_param_pack():
@@ -544,16 +515,16 @@ if run_btn:
         dd["__BENCHMARK__"] = raw[config.BENCHMARK]
         dd["__VIX__"] = raw["^VIX"]
         dd["__FX__"] = raw["EURUSD=X"]
-        cor1m = load_cor1m_local()
+        cor1m, cor1m_source = load_cor1m()
         cor1m_lag_business_days = business_day_lag(
             cor1m.index.max(), pd.Timestamp(end_date)
         )
         if cor1m_lag_business_days > 2:
             st.warning(
-                f"COR1M locale fermo al {cor1m.index.max():%Y-%m-%d} "
+                f"COR1M ({cor1m_source}) fermo al {cor1m.index.max():%Y-%m-%d} "
                 f"({cor1m_lag_business_days} giorni feriali prima della data finale). "
-                "Il motore mantiene l'ultimo valore disponibile: aggiorna i CSV "
-                "prima di interpretare il risultato come segnale corrente."
+                "Il motore mantiene l'ultimo valore disponibile: verifica il "
+                "workflow IOVIQUANT_DATA prima di interpretarlo come segnale corrente."
             )
         dd["__COR1M__"] = cor1m
 
@@ -614,6 +585,7 @@ if run_btn:
         st.session_state.run_end_date = pd.Timestamp(end_date)
         st.session_state.cor1m_first_date = cor1m.index.min()
         st.session_state.cor1m_last_date = cor1m.index.max()
+        st.session_state.cor1m_source = cor1m_source
         st.session_state.loaded_tickers = list(dd)
         st.session_state.run_currencies = sorted(active_currencies)
         st.session_state.run_universe = list(active_universe)
@@ -636,7 +608,7 @@ if st.session_state.get("run_done", False):
 
     with tab1:
         st.caption(
-            "COR1M locale: "
+            f"COR1M ({st.session_state.cor1m_source}): "
             f"{st.session_state.cor1m_first_date:%Y-%m-%d} → "
             f"{st.session_state.cor1m_last_date:%Y-%m-%d} · "
             f"{len(signals)}/{len(run_universe)} titoli caricati · "
