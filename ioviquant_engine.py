@@ -534,7 +534,7 @@ DEFAULT_PARAMS = {
 
 
 # ==============================================================================
-# CONFIGURAZIONE RACCOMANDATA (16/07/2026) — Step A + Step B completati
+# CONFIGURAZIONE RACCOMANDATA (24/08/2026) — baseline COR1M-off
 # ==============================================================================
 # NON sovrascrive DEFAULT_PARAMS: DEFAULT_PARAMS resta il punto di partenza
 # "vanilla" non calibrato, usato come baseline "Scalare Default" per i
@@ -549,11 +549,11 @@ DEFAULT_PARAMS = {
 # binding). extension_penalty e vix_factor ancora in valutazione (marginali,
 # non ancora tagliati).
 #
-# ATTENZIONE — dipendenza dati: use_cor1m_brake=True richiede la serie
-# ^COR1M nel data_dict (chiave "__COR1M__"). yfinance NON la fornisce
-# (verificato, vedi riassunto progetto) — nell'app live va alimentata da
-# CSV (Investing.com) finche' non si trova una fonte migliore. Senza quella
-# chiave il motore usa un fattore neutro 1.0 (nessun freno, nessun crash).
+# Dal 24/08/2026 il freno COR1M e' spento nella baseline: sull'universo Xetra
+# disponibile (590/600) il solo spegnimento porta Alpha FULL da -7.93% a
+# +7.47% e Unicorn rate da 0.973% a 1.473%, a fronte di MaxDD da -30.67% a
+# -31.64%. La priorita' deliberata e' il risultato finale. La serie ^COR1M
+# resta supportata e richiesta soltanto quando il layer viene riattivato.
 RECOMMENDED_PARAMS = {
     **DEFAULT_PARAMS,
     # Gate di qualita' dell'ingresso promosso il 01/08/2026 dopo ablazione
@@ -571,15 +571,12 @@ RECOMMENDED_PARAMS = {
     # convessita' estrema.
     "convexity_exp": 2.0,
     "use_equity_cap": True,          # fix §7.6
-    # use_profit_aware: NON rimosso (16/07/2026, correzione post-hoc). Il taglio
-    # iniziale di Step B si basava solo su SUB_A (bit-identico li'), ma la
-    # conferma su SUB_B (fatta con ritardo, errore di processo -- si salta la
-    # conferma test solo se il train mostra un vincolo davvero mai attivo, non
-    # per pigrizia) mostra che il meccanismo NON e' inerte in bull market: senza,
-    # Alpha SUB_B +22.13%->+28.38% ma MaxDD SUB_B -17.34%->-19.91%. Si tiene
-    # True, coerente con la cautela decisa sui Candidati A/B (non comprare Alpha
-    # con MaxDD peggiore senza deciderlo esplicitamente).
-    "use_cor1m_brake": True,
+    # Pruning 24/08/2026: con convexity_exp=2 e COR1M spento, il profit-aware e'
+    # esattamente inerte su core-60 (FULL/SUB_A/SUB_B) e sull'universo Xetra
+    # disponibile (590 titoli): stessi trade, equity e KPI dell'app. Il ramo
+    # resta nel motore per riprodurre configurazioni storiche.
+    "use_profit_aware": False,
+    "use_cor1m_brake": False,
     "cor1m_threshold": 50.0,
 
     # Capitale/reporting EUR, strumenti eseguiti in USD. Le ipotesi di costo

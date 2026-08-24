@@ -84,29 +84,10 @@ active_universe_file = (
 st.sidebar.caption(
     f"Universo selezionato: {len(active_universe)} titoli · fonte: {active_universe_file.name}"
 )
-use_omd_entry_filter = st.sidebar.toggle(
-    "Attiva selezione mensile OMD",
-    value=False,
-    disabled=not use_expanded_universe,
-    help="Richiede l'universo Xetra 600. OMD genera ogni mese 60 ticker Buy "
-         "(K=30); Unicorn Hunter può aprire nuove posizioni solo su questi nomi.",
-)
-if not use_expanded_universe:
-    use_omd_entry_filter = False
-use_omd_forced_sell_exit = st.sidebar.toggle(
-    "Chiudi i titoli nel cluster Sell OMD",
-    value=False,
-    disabled=not use_omd_entry_filter,
-    help="Se attivo, i 30 ticker Sell OMD vengono chiusi alla prima Open "
-         "successiva al ribilanciamento. Se spento, le posizioni esistenti "
-         "restano affidate alle uscite Unicorn Hunter.",
-)
-if not use_omd_entry_filter:
-    use_omd_forced_sell_exit = False
-if use_omd_entry_filter:
-    st.sidebar.caption(
-        "OMD: K=30 · Buy=60 · Sell=30 · segnali mensili · refit ogni 12 mesi"
-    )
+# Layer potati dalla configurazione Lite: restano disponibili nel motore per
+# riprodurre esperimenti storici, ma non generano piu' controlli nel pannello.
+use_omd_entry_filter = False
+use_omd_forced_sell_exit = False
 legacy_mode = st.sidebar.checkbox(
     "Attiva Modalità LEGACY (Setup Precedente)", value=False,
     help="Se attivato, ignora le logiche scalari/2D/Filtro Unicorno e usa l'algoritmo rigido originario, "
@@ -115,29 +96,13 @@ legacy_mode = st.sidebar.checkbox(
 use_scalar_sizing = st.sidebar.checkbox("Attiva Size Scalare Continua", value=True, disabled=legacy_mode)
 use_2d_breadth = st.sidebar.checkbox("Attiva Breadth 2D (Livello + Momentum)", value=True, disabled=legacy_mode)
 use_dynamic_sl = st.sidebar.checkbox("Attiva Trailing ATR Modulato dal Regime", value=True, disabled=legacy_mode)
-use_profit_aware = st.sidebar.checkbox(
-    "Attiva Stop Profit-Aware", value=True, disabled=legacy_mode,
-    help="Sul train (SUB_A) sembra ininfluente, ma su SUB_B NON lo e' (16/07/2026): "
-         "disattivarlo alza l'Alpha ma peggiora il MaxDD in bull market. Tenuto ON "
-         "per coerenza con la cautela su Alpha-vs-MaxDD del progetto."
-)
 use_equity_cap = st.sidebar.checkbox(
-    "Attiva Cap di Sizing su Equity Corrente", value=True, disabled=legacy_mode,
+    "Attiva Cap di Sizing su Equity Corrente",
+    value=bool(eng.RECOMMENDED_PARAMS["use_equity_cap"]),
+    disabled=legacy_mode,
     help="Fix §7.6 (16/07/2026): il tetto per posizione (15%) usa l'equity CORRENTE invece "
          "del capitale iniziale fisso. Causale (nessun look-ahead). Se disattivato, si torna "
          "al comportamento storico (bug noto: il rischio proporzionale non si riduce in drawdown)."
-)
-use_cor1m_brake = st.sidebar.checkbox(
-    "Attiva Freno Correlazione Implicita (^COR1M)", value=True, disabled=legacy_mode,
-    help="Usa IOVIQUANT_DATA; se GitHub non risponde, ripiega sui CSV locali."
-)
-use_partial_exit = st.sidebar.checkbox(
-    "Attiva Uscita Parziale (Layer 5quater)", value=False, disabled=legacy_mode,
-    help="Validato 20/07/2026 su train/test/FULL: a partial_exit_pct=0.50, MaxDD FULL "
-         "-18.31%->-13.92%, Unicorn Rate migliora, costo Alpha -1.2pp. NON attivato di "
-         "default (decisione lasciata a te, stesso trattamento della config conservativa "
-         "cx=3.0/shift=0.9). Vende una quota (azioni intere) al traguardo di profit_threshold, "
-         "senza chiudere la posizione."
 )
 with st.sidebar.form("backtest_params"):
     st.header("📅 Orizzonte Temporale")
@@ -168,24 +133,21 @@ with st.sidebar.form("backtest_params"):
     vix_k = st.slider("Ripidità Sigmoide VIX", 0.05, 1.0, 0.25, 0.05, disabled=legacy_mode,
                        help="Più alto = transizione più brusca attorno alla soglia. In Legacy resta on/off rigido.")
     vix_floor = st.slider("Fattore VIX Minimo (alta volatilità)", 0.2, 0.9, 0.5, 0.05, disabled=legacy_mode)
-    convexity_exp = st.slider("Esponente Convessità Sizing", 1.0, 6.0, 5.0, 0.1, disabled=legacy_mode,
-                               help="raw_score^esponente: >1 penalizza setup mediocri, premia sproporzionatamente quelli eccezionali. "
-                                    "Calibrato a 5.0 il 16/07/2026 — vive al bordo della griglia testata, non ancora esplorato oltre.")
+    convexity_exp = st.slider(
+        "Esponente Convessità Sizing",
+        1.0,
+        6.0,
+        float(eng.RECOMMENDED_PARAMS["convexity_exp"]),
+        0.1,
+        disabled=legacy_mode,
+        help="raw_score^esponente: >1 penalizza setup mediocri e amplifica quelli "
+             "migliori. Ritarato a 2.0 il 16/08/2026 per evitare che il cap al "
+             "15% schiacci la dispersione prodotta dal raw score.",
+    )
 
-    st.header("🦄 Layer 2: Filtro Unicorno (Estensione + Breakout)")
+    st.header("🦄 Layer 2: Filtro Unicorno (Estensione)")
     ext_threshold = st.slider("Soglia Estensione (ATR sopra EMA63)", 1.0, 9.0, 6.0, 0.5, disabled=legacy_mode)
     ext_k = st.slider("Decadimento Penalità Estensione", 0.1, 2.0, 0.5, 0.1, disabled=legacy_mode)
-    breakout_lookback = st.slider("Lookback Nuovo Massimo (giorni)", 5, 60, 20, 5, disabled=legacy_mode,
-                                   help="Inerte quando 'Bonus Moltiplicativo Breakout' e' 0.0 (default "
-                                        "raccomandato dal 16/07/2026): alimenta solo quel bonus, che a "
-                                        "zero e' zero per costruzione indipendentemente da questo valore. "
-                                        "Vivo solo se il bonus viene riattivato.")
-    compression_ratio = st.slider("Soglia Compressione ATR%", 0.3, 1.0, 0.75, 0.05, disabled=legacy_mode,
-                                   help="ATR% attuale < soglia × media 63gg = volatilità compressa (pre-breakout). "
-                                        "Stessa nota di 'Lookback Nuovo Massimo': inerte a bonus=0.0.")
-    breakout_bonus_pct = st.slider("Bonus Moltiplicativo Breakout", 0.0, 1.0, 0.0, 0.05, disabled=legacy_mode,
-                                    help="Default 0.0 dal 16/07/2026 (Step A): rimosso dalla config raccomandata — "
-                                         "in combinazione con convexity_exp/floor-ceiling alti, peggiorava sia Alpha sia MaxDD.")
 
     st.header("🌍 Layer 3: Market Breadth")
     old_breadth_threshold = st.slider("Soglia Filtro Breadth Fisso (%)", 10, 90, 40, 5,
@@ -207,7 +169,7 @@ with st.sidebar.form("backtest_params"):
     hmm_w = st.slider("Peso Amplificatore HMM Legacy (w)", 0.0, 3.0, 1.5, 0.1,
                        help="Usato solo in Legacy: 1 + w×(P_Bull - 0.5).")
 
-    st.header("🛡️ Layer 5: Stop Dinamico & Profit-Aware")
+    st.header("🛡️ Layer 5: Stop dinamico")
     w_bf = st.slider("Peso Breadth (BF) su R_exit", 0.0, 1.0, 1.0, 0.1, disabled=legacy_mode,
                       help="Aggiornato a 1.0 il 18/07/2026: R_exit ora e' guidato solo dalla breadth. "
                            "Il livello P_Bull (w_hmm) e' stato tolto perche' soffre della staleness "
@@ -218,32 +180,6 @@ with st.sidebar.form("backtest_params"):
                             "per confronto, ma 0.0 e' il valore validato.")
     k_min = st.slider("Moltiplicatore ATR Minimo (Stop Stretto)", 1.0, 3.0, 1.5, 0.1)
     k_max = st.slider("Moltiplicatore ATR Massimo (Lascia Correre)", 3.0, 6.0, 3.5, 0.1, disabled=legacy_mode)
-    profit_threshold = st.slider("Soglia Profitto per Stop Allargato", 0.1, 2.0, 0.5, 0.05,
-                                  disabled=(legacy_mode or not use_profit_aware))
-    k_profit_cap = st.slider("Moltiplicatore ATR Oltre Soglia Profitto", 3.0, 8.0, 5.0, 0.25,
-                              disabled=(legacy_mode or not use_profit_aware),
-                              help="Verificato 18/07/2026: satura esattamente a 5.0 — nessun valore "
-                                   "superiore cambia una sola metrica su SUB_A o SUB_B. Non serve "
-                                   "esplorare oltre; un margine 3.5-5.0 resta da affinare (bassa priorità).")
-
-    st.header("🔗 Layer 6bis: Freno Correlazione Implicita (^COR1M)")
-    st.caption("La serie COR1M viene caricata dal repository dati comune, con "
-               "fallback sui CSV locali.")
-    cor1m_threshold = st.slider("Soglia Correlazione Implicita (^COR1M)", 20.0, 60.0, 50.0, 1.0,
-                                 disabled=(legacy_mode or not use_cor1m_brake),
-                                 help="Calibrato a 50.0 (~P95 storico) il 11/07/2026. Sotto questa soglia il freno "
-                                      "e' inattivo; sopra, riduce il sizing in ingresso e stringe lo stop su tutte "
-                                      "le posizioni aperte.")
-
-    st.header("✂️ Layer 5quater: Uscita Parziale")
-    st.caption("Attivabile dal checkbox in sidebar. Vende una quota di azioni intere al traguardo di "
-               "profit_threshold (sopra), senza chiudere la posizione — il resto resta gestito normalmente.")
-    partial_exit_pct = st.slider("Quota Venduta al Traguardo di Profitto", 0.10, 0.90, 0.50, 0.05,
-                                  disabled=(legacy_mode or not use_partial_exit),
-                                  help="Validato 20/07/2026: 0.50 e' il miglior compromesso trovato "
-                                       "(MaxDD FULL -18.31%->-13.92%, Alpha -1.2pp, Unicorn Rate migliora). "
-                                       "Con titoli a prezzo alto e posizioni piccole, l'arrotondamento a "
-                                       "azioni intere puo' azzerare l'effetto su singoli trade (limite noto).")
 
     run_btn = st.form_submit_button("Avvia Elaborazione 🚀")
 
@@ -348,8 +284,6 @@ def build_param_pack():
         "vix_threshold": vix_threshold, "vix_k": vix_k, "vix_floor": vix_floor,
         "entry_threshold": entry_threshold, "use_scalar_sizing": use_scalar_sizing,
         "ext_threshold": ext_threshold, "ext_k": ext_k,
-        "breakout_lookback": breakout_lookback, "compression_ratio": compression_ratio,
-        "breakout_bonus_pct": breakout_bonus_pct,
         "breadth_alpha": breadth_alpha, "breadth_k": breadth_k,
         "old_breadth_threshold": old_breadth_threshold, "use_2d_breadth": use_2d_breadth,
         "hmm_min_train": hmm_min_train, "hmm_refit_every": hmm_refit_every,
@@ -359,19 +293,13 @@ def build_param_pack():
         "convexity_exp": convexity_exp,
         "use_dynamic_sl": use_dynamic_sl, "w_bf": w_bf, "w_hmm": w_hmm,
         "k_min": k_min, "k_max": k_max,
-        "use_profit_aware": use_profit_aware, "profit_threshold": profit_threshold,
-        "k_profit_cap": k_profit_cap,
         "use_equity_cap": use_equity_cap,
-        "use_cor1m_brake": use_cor1m_brake, "cor1m_threshold": cor1m_threshold,
-        "use_partial_exit": use_partial_exit, "partial_exit_pct": partial_exit_pct,
         "use_fx_conversion": True,
         "base_currency": "EUR", "execution_currency": "USD",
         "commission_fixed": commission_fixed,
         "spread_bps": spread_bps, "slippage_bps": slippage_bps,
         "fx_conversion_bps": fx_conversion_bps,
         "block_same_open_reentry": True,
-        "use_omd_entry_filter": use_omd_entry_filter,
-        "use_omd_forced_sell_exit": use_omd_forced_sell_exit,
     })
     return p
 
